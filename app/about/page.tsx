@@ -44,7 +44,7 @@ export default function AboutPage() {
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=2400&q=85&auto=format&fit=crop')",
+              "url('https://images.unsplash.com/photo-1606185540834-d6e7483ee1a4?w=2400&q=85&auto=format&fit=crop')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
