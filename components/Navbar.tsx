@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -31,14 +32,20 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-display text-lg font-bold tracking-tight"
-        >
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-gradient-to-br from-ocean-500 to-gold-500 text-ink-900">
-            3A
+        <Link href="/" className="flex items-center" aria-label="Three A Transways — Home">
+          {/* The logo file is dark-navy artwork on a white background.
+              We give it a white pill so it reads cleanly against the
+              dark / translucent navbar. */}
+          <span className="grid place-items-center rounded-lg bg-white px-3 py-2 shadow-md">
+            <Image
+              src="/logo.jpg"
+              alt="Three A Transways"
+              width={160}
+              height={140}
+              priority
+              className="h-10 w-auto object-contain"
+            />
           </span>
-          <span className="text-ocean-400">Three A Transways</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">

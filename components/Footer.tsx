@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -6,11 +7,16 @@ export function Footer() {
     <footer className="border-t border-white/5 bg-ink-900 py-16">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-4 lg:px-12">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2 font-display text-lg font-bold text-ocean-400">
-            <span className="grid h-9 w-9 place-items-center rounded-md bg-gradient-to-br from-ocean-500 to-gold-500 text-ink-900">
-              3A
+          <div className="inline-flex">
+            <span className="grid place-items-center rounded-lg bg-white px-3 py-2 shadow-md">
+              <Image
+                src="/logo.jpg"
+                alt="Three A Transways"
+                width={160}
+                height={140}
+                className="h-12 w-auto object-contain"
+              />
             </span>
-            Three A Transways
           </div>
           <p className="mt-4 max-w-md text-sm text-white/60">
             Global logistics, engineered for trust. Sea, air and road
