@@ -6,11 +6,11 @@ export function Footer() {
     <footer className="border-t border-white/5 bg-ink-900 py-16">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-4 lg:px-12">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2 font-display text-lg font-bold">
+          <div className="flex items-center gap-2 font-display text-lg font-bold text-ocean-400">
             <span className="grid h-9 w-9 place-items-center rounded-md bg-gradient-to-br from-ocean-500 to-gold-500 text-ink-900">
               3A
             </span>
-            Three A <span className="text-ocean-400">Transways</span>
+            Three A Transways
           </div>
           <p className="mt-4 max-w-md text-sm text-white/60">
             Global logistics, engineered for trust. Sea, air and road

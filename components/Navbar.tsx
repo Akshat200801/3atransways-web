@@ -38,9 +38,7 @@ export function Navbar() {
           <span className="grid h-9 w-9 place-items-center rounded-md bg-gradient-to-br from-ocean-500 to-gold-500 text-ink-900">
             3A
           </span>
-          <span>
-            Three A <span className="text-ocean-400">Transways</span>
-          </span>
+          <span className="text-ocean-400">Three A Transways</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
