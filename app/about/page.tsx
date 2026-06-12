@@ -41,15 +41,16 @@ export default function AboutPage() {
       <ScrollProgress />
       <section className="relative overflow-hidden py-20 lg:py-28">
         <div
-          className="absolute inset-0 -z-10 opacity-30"
+          className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=2000&q=80&auto=format&fit=crop')",
+              "url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=2400&q=85&auto=format&fit=crop')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/80 to-ink-900" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-900/50 via-ink-900/65 to-ink-900" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,14,26,0.55)_100%)]" />
         <div className="mx-auto max-w-5xl px-6 text-center lg:px-12">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -65,7 +66,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mt-4 font-display text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl"
           >
-            Twenty-two years of saying <span className="gradient-text">yes</span>{" "}
+            Fourteen years of saying <span className="gradient-text">yes</span>{" "}
             to impossible cargo.
           </motion.h1>
           <motion.p

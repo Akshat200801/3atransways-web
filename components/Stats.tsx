@@ -71,9 +71,9 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-ink-900 p-8 lg:p-10"
+              className="bg-ink-900 p-6 lg:p-7"
             >
-              <p className="font-display text-4xl font-bold text-white lg:text-6xl">
+              <p className="font-display text-3xl font-bold tracking-tight text-white tabular-nums sm:text-4xl lg:text-[2.75rem] xl:text-5xl">
                 <Counter to={s.value} suffix={s.suffix} />
               </p>
               <p className="mt-2 text-sm text-white/60">{s.label}</p>
