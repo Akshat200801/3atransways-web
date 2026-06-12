@@ -8,15 +8,13 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-4 lg:px-12">
         <div className="md:col-span-2">
           <div className="inline-flex">
-            <span className="grid place-items-center rounded-lg bg-white px-3 py-2 shadow-md">
-              <Image
-                src="/logo.jpg"
-                alt="Three A Transways"
-                width={160}
-                height={140}
-                className="h-12 w-auto object-contain"
-              />
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Three A Transways"
+              width={200}
+              height={180}
+              className="h-14 w-auto object-contain brightness-0 invert"
+            />
           </div>
           <p className="mt-4 max-w-md text-sm text-white/60">
             Global logistics, engineered for trust. Sea, air and road
