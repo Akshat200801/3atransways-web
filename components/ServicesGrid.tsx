@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Ship, Plane, Truck, Warehouse, ArrowUpRight } from "lucide-react";
+import { Ship, Plane, Truck, Warehouse, FileCheck, ArrowUpRight } from "lucide-react";
 
 const SERVICES = [
   {
@@ -36,6 +36,14 @@ const SERVICES = [
     image:
       "https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80&auto=format&fit=crop",
   },
+  {
+    icon: FileCheck,
+    title: "Customs Clearance",
+    blurb:
+      "In-house brokerage at JNPT, Mundra, Nhava Sheva and Mumbai air cargo. Documentation, duty optimisation and exception handling — done.",
+    image:
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80&auto=format&fit=crop",
+  },
 ];
 
 export function ServicesGrid() {
@@ -68,6 +76,7 @@ export function ServicesGrid() {
         <div className="grid gap-6 md:grid-cols-2">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
+            const isLastOdd = i === SERVICES.length - 1 && SERVICES.length % 2 === 1;
             return (
               <motion.div
                 key={s.title}
@@ -75,7 +84,9 @@ export function ServicesGrid() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.12 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10"
+                className={`group relative overflow-hidden rounded-2xl border border-white/10 ${
+                  isLastOdd ? "md:col-span-2" : ""
+                }`}
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"

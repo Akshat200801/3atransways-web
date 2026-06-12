@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Ship, Plane, Truck, Warehouse, Check } from "lucide-react";
+import { Ship, Plane, Truck, Warehouse, FileCheck, Check } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
@@ -59,6 +59,21 @@ const SERVICES = [
       "Vendor-managed inventory + supplier scorecards",
       "Pick-pack-ship for D2C and B2B brands",
       "Inventory dashboards with daily reconciliation",
+    ],
+  },
+  {
+    icon: FileCheck,
+    title: "Customs Clearance",
+    intro:
+      "In-house Customs House Agents (CHA) at every major Indian gateway. We handle documentation, classification, duty optimisation and exceptions so your cargo never sits idle.",
+    image:
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80&auto=format&fit=crop",
+    bullets: [
+      "Licensed CHA at JNPT, Mundra, Nhava Sheva and Mumbai air cargo",
+      "Bill of Entry, Shipping Bill and IGM filing",
+      "HS code classification + duty drawback advisory",
+      "Exception handling: examinations, valuations, query responses",
+      "Real-time clearance status visible on your Cargoflow dashboard",
     ],
   },
 ];
