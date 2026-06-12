@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --background: 10 14 26;
+  --foreground: 245 248 255;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Smooth scrollbar that doesn't fight the cinematic feel. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #0284c7);
+  border-radius: 4px;
+}
+
+/* Reveal helper — pair with the SectionReveal component for content
+ * that fades up as it scrolls into view. */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass card surface used for service tiles and stats. */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* Hero background — Ken-Burns slow zoom layered with a darken gradient. */
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55);
+}
+
+/* Gradient text helper. */
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #e8c084 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
