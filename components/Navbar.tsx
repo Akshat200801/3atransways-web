@@ -32,19 +32,22 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
-        <Link href="/" className="flex items-center" aria-label="Three A Transways — Home">
-          {/* Transparent-background PNG generated from logo.jpg via
-              scripts/make-logo-transparent.mjs. The artwork is dark
-              navy, which is hard to read on the dark navbar — so we
-              brightness-flip it to a near-white tint when needed. */}
+        <Link
+          href="/"
+          className="flex items-center gap-3"
+          aria-label="Three A Transways — Home"
+        >
           <Image
             src="/logo.png"
-            alt="Three A Transways"
+            alt=""
             width={180}
             height={160}
             priority
             className="h-12 w-auto object-contain brightness-0 invert"
           />
+          <span className="font-display text-lg font-bold tracking-tight text-ocean-400">
+            Three A Transways
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">

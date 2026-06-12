@@ -7,14 +7,17 @@ export function Footer() {
     <footer className="border-t border-white/5 bg-ink-900 py-16">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-4 lg:px-12">
         <div className="md:col-span-2">
-          <div className="inline-flex">
+          <div className="inline-flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="Three A Transways"
+              alt=""
               width={200}
               height={180}
               className="h-14 w-auto object-contain brightness-0 invert"
             />
+            <span className="font-display text-lg font-bold tracking-tight text-ocean-400">
+              Three A Transways
+            </span>
           </div>
           <p className="mt-4 max-w-md text-sm text-white/60">
             Global logistics, engineered for trust. Sea, air and road
