@@ -69,7 +69,7 @@ export function ServicesGrid() {
           </h2>
           <p className="mt-5 text-white/60">
             One partner from origin pick-up to last-mile delivery —
-            backed by 22+ years of moving the impossible.
+            backed by 14+ years of moving the impossible.
           </p>
         </motion.div>
 

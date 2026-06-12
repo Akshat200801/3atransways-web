@@ -23,14 +23,14 @@ const VALUES = [
   {
     icon: Anchor,
     title: "Indian roots, global lanes",
-    body: "Mumbai, Jaipur, Nhava Sheva, Mundra, Chennai — and partnerships across Dubai, Singapore, Rotterdam, Long Beach. Wherever the cargo flows.",
+    body: "Jaipur, Mumbai, Nhava Sheva, Mundra, Chennai — and partnerships across Dubai, Singapore, Rotterdam, Long Beach. Wherever the cargo flows.",
   },
 ];
 
 const TIMELINE = [
-  { year: "2003", event: "Founded in Mumbai as a customs house brokerage" },
+  { year: "2012", event: "Founded in Jaipur as a customs house brokerage" },
   { year: "2008", event: "Expanded into multi-modal freight forwarding" },
-  { year: "2014", event: "Jaipur office opens; project cargo division launched" },
+  { year: "2014", event: "Mumbai office opens; project cargo division launched" },
   { year: "2019", event: "Crossed 10,000 shipments cleared annually" },
   { year: "2024", event: "Digital platform rollout — live tracking + customer portal" },
 ];

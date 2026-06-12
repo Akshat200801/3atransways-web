@@ -42,7 +42,7 @@ export default function HomePage() {
             </SectionReveal>
             <SectionReveal delay={0.15}>
               <p className="mt-6 text-white/70">
-                Three A Transways began on the docks of Mumbai in 2003 —
+                Three A Transways began out of a small Jaipur office in 2012 —
                 a single broker, a battered Ambassador, and a notebook
                 full of cargo manifests. Today we're a full-stack
                 logistics partner moving thousands of shipments a year

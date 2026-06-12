@@ -56,7 +56,7 @@ export function Hero() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 backdrop-blur"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-ocean-400 shadow-[0_0_10px] shadow-ocean-400" />
-          Three A Transways · est. 2003
+          Three A Transways · est. 2012
         </motion.p>
 
         <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl lg:text-8xl">

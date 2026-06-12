@@ -9,9 +9,9 @@ interface Stat {
 }
 
 const STATS: Stat[] = [
-  { value: 22, suffix: "+ yrs", label: "Of operating expertise" },
+  { value: 14, suffix: "+ yrs", label: "Of operating expertise" },
   { value: 40, suffix: "+", label: "Countries served" },
-  { value: 15000, suffix: "+", label: "Shipments delivered" },
+  { value: 1000000, suffix: "+", label: "Containers delivered" },
   { value: 99.4, suffix: "%", label: "On-time clearance rate" },
 ];
 
@@ -35,7 +35,7 @@ function Counter({ to, suffix }: { to: number; suffix?: string }) {
   }, [inView, to]);
 
   const isFloat = !Number.isInteger(to);
-  const display = isFloat ? n.toFixed(1) : Math.round(n).toLocaleString();
+  const display = isFloat ? n.toFixed(1) : Math.round(n).toLocaleString("en-IN");
   return (
     <span ref={ref}>
       {display}

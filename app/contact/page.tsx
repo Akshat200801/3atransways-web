@@ -7,14 +7,14 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 
 const OFFICES = [
   {
-    city: "Mumbai (HQ)",
-    address: "Thane West, Mumbai, Maharashtra",
+    city: "Jaipur (HQ)",
+    address: "Shyam Nagar, Jaipur, Rajasthan",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
   },
   {
-    city: "Jaipur",
-    address: "Shyam Nagar, Jaipur, Rajasthan",
+    city: "Mumbai",
+    address: "Thane West, Mumbai, Maharashtra",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
   },
