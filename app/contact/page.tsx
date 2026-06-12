@@ -22,6 +22,32 @@ const OFFICES = [
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setErrorMsg(null);
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(fd.entries());
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const body = (await res.json()) as { ok: boolean; error?: string };
+      if (!res.ok || !body.ok) {
+        throw new Error(body.error ?? "Send failed");
+      }
+      setSent(true);
+    } catch (err) {
+      setErrorMsg((err as Error).message);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <main className="bg-ink-900 pt-32">
@@ -60,13 +86,7 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5 lg:gap-16 lg:px-12">
           <SectionReveal className="lg:col-span-3">
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                // Static form for now — wire up to your inbox / a
-                // serverless function when ready. For example POST to
-                // Formspree, Resend, or your own /api/contact route.
-                setSent(true);
-              }}
+              onSubmit={handleSubmit}
               className="glass rounded-2xl p-8 lg:p-10"
             >
               {sent ? (
@@ -106,11 +126,15 @@ export default function ContactPage() {
                     name="message"
                     textarea
                   />
+                  {errorMsg && (
+                    <p className="mt-5 text-sm text-red-400">{errorMsg}</p>
+                  )}
                   <button
                     type="submit"
-                    className="group mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ocean-500 to-ocean-600 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-ocean-500/30"
+                    disabled={submitting}
+                    className="group mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ocean-500 to-ocean-600 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-ocean-500/30 disabled:opacity-60"
                   >
-                    Request a quote
+                    {submitting ? "Sending…" : "Request a quote"}
                     <Send className="h-4 w-4 transition group-hover:translate-x-1" />
                   </button>
                 </>
