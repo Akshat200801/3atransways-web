@@ -10,8 +10,8 @@ interface Stat {
 
 const STATS: Stat[] = [
   { value: 14, suffix: "+ yrs", label: "Of operating expertise" },
-  { value: 40, suffix: "+", label: "Countries served" },
   { value: 1000000, suffix: "+", label: "Containers delivered" },
+  { value: 40, suffix: "+", label: "Countries served" },
   { value: 99.4, suffix: "%", label: "On-time clearance rate" },
 ];
 
