@@ -16,10 +16,25 @@
 
 html {
   scroll-behavior: smooth;
+  /* Backdrop borrowed from the platform: dual-scale grid lines + corner
+     radials. Tuned for dark mode — white lines at 3% / 4% alpha,
+     ocean-tinted top-right glow, gold-tinted bottom-left glow, violet
+     center wash. <html> doesn't scroll so no fixed-attachment issues. */
+  background-color: rgb(var(--background));
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 50% at 100% 0%, rgba(56, 189, 248, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(232, 192, 132, 0.08), transparent 65%),
+    radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.06), transparent 60%);
+  background-size: 32px 32px, 32px 32px, 192px 192px, 192px 192px, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat;
 }
 
 body {
-  background: rgb(var(--background));
+  background: transparent;
   color: rgb(var(--foreground));
   font-family: var(--font-sans);
   overflow-x: hidden;
