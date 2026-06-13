@@ -124,8 +124,8 @@ export function Stats() {
                   aria-hidden
                   className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-60 blur-3xl transition-opacity duration-300 group-hover:opacity-90 ${t.halo}`}
                 />
-                <div className="relative pl-3">
-                  <p className="font-display text-3xl font-bold tracking-tight text-white tabular-nums sm:text-4xl lg:text-[2.5rem] xl:text-5xl">
+                <div className="relative">
+                  <p className="font-display text-3xl font-bold tracking-tighter text-white tabular-nums sm:text-4xl lg:text-[2rem] xl:text-[2.25rem]">
                     <Counter to={s.value} suffix={s.suffix} />
                   </p>
                   <p

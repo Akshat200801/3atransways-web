@@ -18,7 +18,7 @@ const SERVICES = [
     blurb:
       "Urgent, temperature-controlled and oversized air cargo with priority handling at every major hub.",
     image:
-      "https://images.unsplash.com/photo-1583511655802-41f6ad14ec98?w=1200&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1200&q=80&auto=format&fit=crop",
   },
   {
     icon: Truck,
