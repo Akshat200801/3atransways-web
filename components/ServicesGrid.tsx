@@ -10,7 +10,7 @@ const SERVICES = [
     blurb:
       "FCL & LCL across every major lane. Door-to-door from Nhava Sheva, Mundra, Chennai and beyond.",
     image:
-      "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1200&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&q=80&auto=format&fit=crop",
   },
   {
     icon: Plane,

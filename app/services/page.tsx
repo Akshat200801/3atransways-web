@@ -21,7 +21,7 @@ const SERVICES: Service[] = [
     intro:
       "FCL, LCL, RoRo and break-bulk across every major trade lane. Direct contracts with Maersk, MSC, CMA-CGM, ONE, Hapag-Lloyd and more.",
     image:
-      "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1600&q=80&auto=format&fit=crop",
     bullets: [
       "FCL & LCL bookings on weekly sailings",
       "Reefer, hazmat & out-of-gauge expertise",
