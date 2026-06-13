@@ -56,21 +56,26 @@ const STATS: Stat[] = [
 
 function Counter({ to, suffix }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  // No margin — fires the instant any pixel of the tile is visible.
+  // The previous '-100px' inset threshold was missing on tall mobile
+  // viewports for the middle tiles, leaving the counters stuck at 0.
+  const inView = useInView(ref, { once: true });
   const [n, setN] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
     const duration = 1600;
     const start = performance.now();
+    let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / duration);
       // Ease-out cubic — fast start, gentle finish, feels classy.
       const eased = 1 - Math.pow(1 - p, 3);
       setN(to * eased);
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [inView, to]);
 
   const isFloat = !Number.isInteger(to);
