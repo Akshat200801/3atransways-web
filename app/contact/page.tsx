@@ -4,19 +4,30 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { TONE, type Tone } from "@/lib/tones";
 
-const OFFICES = [
+interface Office {
+  city: string;
+  address: string;
+  phone: string;
+  email: string;
+  tone: Tone;
+}
+
+const OFFICES: Office[] = [
   {
     city: "Jaipur (HQ)",
     address: "Shyam Nagar, Jaipur, Rajasthan",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
+    tone: "ocean",
   },
   {
     city: "Mumbai",
     address: "Thane West, Mumbai, Maharashtra",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
+    tone: "gold",
   },
 ];
 
@@ -87,8 +98,17 @@ export default function ContactPage() {
           <SectionReveal className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
-              className="glass rounded-2xl p-8 lg:p-10"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-8 ring-1 ring-inset ring-sky-400/20 shadow-[0_0_40px_-12px_rgb(56_189_248_/_0.3)] lg:p-10"
             >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute left-0 top-8 bottom-8 w-[3px] rounded-r-full bg-gradient-to-b from-sky-400 via-sky-400/70 to-sky-400/30 opacity-80"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-sky-400/20 opacity-50 blur-3xl"
+              />
+              <div className="relative">
               {sent ? (
                 <div className="grid place-items-center py-16 text-center">
                   <div className="mb-4 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-ocean-500 to-gold-500">
@@ -139,43 +159,59 @@ export default function ContactPage() {
                   </button>
                 </>
               )}
+              </div>
             </form>
           </SectionReveal>
 
           <div className="space-y-6 lg:col-span-2">
-            {OFFICES.map((o, i) => (
-              <SectionReveal
-                key={o.city}
-                delay={i * 0.15}
-                className="glass rounded-2xl p-6"
-              >
-                <h3 className="font-display text-xl font-bold">{o.city}</h3>
-                <ul className="mt-4 space-y-3 text-sm text-white/70">
-                  <li className="flex gap-2">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-                    {o.address}
-                  </li>
-                  <li className="flex gap-2">
-                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-                    <a
-                      href={`tel:${o.phone.replace(/\s+/g, "")}`}
-                      className="hover:text-white"
-                    >
-                      {o.phone}
-                    </a>
-                  </li>
-                  <li className="flex gap-2">
-                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-                    <a
-                      href={`mailto:${o.email}`}
-                      className="hover:text-white"
-                    >
-                      {o.email}
-                    </a>
-                  </li>
-                </ul>
-              </SectionReveal>
-            ))}
+            {OFFICES.map((o, i) => {
+              const t = TONE[o.tone];
+              return (
+                <SectionReveal
+                  key={o.city}
+                  delay={i * 0.15}
+                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 ring-1 ring-inset transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.06] ${t.ring} ${t.glow}`}
+                >
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute left-0 top-5 bottom-5 w-[3px] rounded-r-full opacity-80 transition-opacity duration-200 group-hover:opacity-100 ${t.bar}`}
+                  />
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-50 blur-3xl transition-opacity duration-300 group-hover:opacity-80 ${t.halo}`}
+                  />
+                  <div className="relative">
+                    <h3 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text font-display text-xl font-bold text-transparent">
+                      {o.city}
+                    </h3>
+                    <ul className="mt-4 space-y-3 text-sm text-white/70">
+                      <li className="flex gap-2">
+                        <MapPin className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
+                        {o.address}
+                      </li>
+                      <li className="flex gap-2">
+                        <Phone className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
+                        <a
+                          href={`tel:${o.phone.replace(/\s+/g, "")}`}
+                          className="hover:text-white"
+                        >
+                          {o.phone}
+                        </a>
+                      </li>
+                      <li className="flex gap-2">
+                        <Mail className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
+                        <a
+                          href={`mailto:${o.email}`}
+                          className="hover:text-white"
+                        >
+                          {o.email}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </SectionReveal>
+              );
+            })}
           </div>
         </div>
       </section>

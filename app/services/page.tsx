@@ -3,8 +3,18 @@ import { motion } from "framer-motion";
 import { Ship, Plane, Truck, Warehouse, FileCheck, Check } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { TONE, type Tone } from "@/lib/tones";
 
-const SERVICES = [
+interface Service {
+  icon: typeof Ship;
+  title: string;
+  intro: string;
+  image: string;
+  bullets: string[];
+  tone: Tone;
+}
+
+const SERVICES: Service[] = [
   {
     icon: Ship,
     title: "Sea Freight",
@@ -18,6 +28,7 @@ const SERVICES = [
       "Customs clearance at JNPT, Mundra, Chennai",
       "Pre-alerts, B/L management and free-day monitoring",
     ],
+    tone: "ocean",
   },
   {
     icon: Plane,
@@ -25,13 +36,14 @@ const SERVICES = [
     intro:
       "Priority, deferred and consolidated air cargo with priority handling at every major hub — Mumbai, Delhi, Bangalore and beyond.",
     image:
-      "https://images.unsplash.com/photo-1583511655802-41f6ad14ec98?w=1600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1600&q=80&auto=format&fit=crop",
     bullets: [
       "Door-to-door air with carrier-direct contracts",
       "Temperature-controlled & pharma-grade lanes",
       "Charter & on-board courier for emergencies",
       "Live milestone tracking from origin to destination",
     ],
+    tone: "cyan",
   },
   {
     icon: Truck,
@@ -46,6 +58,7 @@ const SERVICES = [
       "Multi-axle & ODC vehicles for project cargo",
       "Real-time GPS tracking on every truck",
     ],
+    tone: "amber",
   },
   {
     icon: Warehouse,
@@ -60,6 +73,7 @@ const SERVICES = [
       "Pick-pack-ship for D2C and B2B brands",
       "Inventory dashboards with daily reconciliation",
     ],
+    tone: "emerald",
   },
   {
     icon: FileCheck,
@@ -75,6 +89,7 @@ const SERVICES = [
       "Exception handling: examinations, valuations, query responses",
       "Real-time clearance status visible on your Cargoflow dashboard",
     ],
+    tone: "violet",
   },
 ];
 
@@ -108,36 +123,62 @@ export default function ServicesPage() {
       {SERVICES.map((s, i) => {
         const Icon = s.icon;
         const reversed = i % 2 === 1;
+        const t = TONE[s.tone];
         return (
           <section
             key={s.title}
-            className={`relative py-20 lg:py-28 ${
+            className={`relative overflow-hidden py-20 lg:py-28 ${
               i % 2 === 0 ? "bg-ink-900" : "bg-ink-800"
             }`}
           >
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            {/* Section-wide ambient halo in the service tone */}
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute ${
+                reversed ? "right-[5%]" : "left-[5%]"
+              } top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full opacity-20 blur-3xl ${t.halo}`}
+            />
+            <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
               <div
                 className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-20 ${
                   reversed ? "lg:[direction:rtl]" : ""
                 }`}
               >
                 <SectionReveal
-                  className="relative h-[420px] overflow-hidden rounded-2xl lg:h-[520px] lg:[direction:ltr]"
+                  className={`group relative h-[420px] overflow-hidden rounded-2xl ring-1 ring-inset transition-all duration-500 hover:scale-[1.01] lg:h-[520px] lg:[direction:ltr] ${t.ring} ${t.glow}`}
                 >
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
                     style={{ backgroundImage: `url(${s.image})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-ink-900/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-ink-900/70 via-ink-900/20 to-transparent" />
+                  {/* Bottom-edge tone gradient bar */}
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 h-1 ${t.bar}`}
+                  />
                 </SectionReveal>
                 <SectionReveal
                   delay={0.1}
-                  className="lg:[direction:ltr]"
+                  className="relative lg:[direction:ltr]"
                 >
-                  <div className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-ocean-500/30 to-gold-500/30">
-                    <Icon className="h-6 w-6 text-ocean-400" />
+                  {/* Left accent bar — anchors the text column with the
+                      same tab-marker treatment as the platform cards. */}
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute -left-4 top-2 bottom-2 hidden w-[3px] rounded-full opacity-80 lg:block ${t.bar}`}
+                  />
+                  <div
+                    className={`mb-5 grid h-12 w-12 place-items-center rounded-xl ring-1 ring-inset ${t.chipBg} ${t.ring}`}
+                  >
+                    <Icon className={`h-6 w-6 ${t.chipText}`} />
                   </div>
-                  <h2 className="font-display text-3xl font-bold sm:text-5xl">
+                  <p
+                    className={`mb-2 text-xs font-semibold uppercase tracking-[0.2em] ${t.chipText}`}
+                  >
+                    0{i + 1} · {s.tone === "amber" ? "Surface" : s.tone === "ocean" ? "Maritime" : s.tone === "cyan" ? "Aviation" : s.tone === "emerald" ? "Fulfilment" : "Compliance"}
+                  </p>
+                  <h2 className="bg-gradient-to-br from-white via-white to-white/70 bg-clip-text font-display text-3xl font-bold text-transparent sm:text-5xl">
                     {s.title}
                   </h2>
                   <p className="mt-5 text-white/70">{s.intro}</p>
@@ -147,7 +188,7 @@ export default function ServicesPage() {
                         key={b}
                         className="flex gap-3 text-sm text-white/80"
                       >
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
+                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
                         {b}
                       </li>
                     ))}

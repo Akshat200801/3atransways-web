@@ -3,27 +3,39 @@ import { SectionReveal } from "@/components/SectionReveal";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { motion } from "framer-motion";
 import { Anchor, Handshake, Sparkles, Globe } from "lucide-react";
+import { TONE, type Tone } from "@/lib/tones";
 
-const VALUES = [
+interface Value {
+  icon: typeof Handshake;
+  title: string;
+  body: string;
+  tone: Tone;
+}
+
+const VALUES: Value[] = [
   {
     icon: Handshake,
     title: "Relationships over transactions",
     body: "Carriers, customs officers, port authorities, drivers — every link in the chain knows us by name. That's how we get exceptions cleared in hours instead of days.",
+    tone: "ocean",
   },
   {
     icon: Sparkles,
     title: "Predictable, even when cargo isn't",
     body: "Weather, strikes, congestion — we plan for it. Customers see updated ETAs the moment the data shifts, not when it's already too late to react.",
+    tone: "gold",
   },
   {
     icon: Globe,
     title: "Truly multimodal, not multi-vendor",
     body: "Sea, air, road and warehouse under one roster. One quote, one invoice, one team accountable end-to-end.",
+    tone: "emerald",
   },
   {
     icon: Anchor,
     title: "Indian roots, global lanes",
     body: "Jaipur, Mumbai, Nhava Sheva, Mundra, Chennai — and partnerships across Dubai, Singapore, Rotterdam, Long Beach. Wherever the cargo flows.",
+    tone: "violet",
   },
 ];
 
@@ -95,17 +107,32 @@ export default function AboutPage() {
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             {VALUES.map((v, i) => {
               const Icon = v.icon;
+              const t = TONE[v.tone];
               return (
                 <SectionReveal
                   key={v.title}
                   delay={i * 0.1}
-                  className="glass rounded-2xl p-8"
+                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-8 ring-1 ring-inset transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.06] ${t.ring} ${t.glow}`}
                 >
-                  <Icon className="h-7 w-7 text-ocean-400" />
-                  <h3 className="mt-5 font-display text-xl font-bold">
-                    {v.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-white/70">{v.body}</p>
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute left-0 top-6 bottom-6 w-[3px] rounded-r-full opacity-80 transition-opacity duration-200 group-hover:opacity-100 ${t.bar}`}
+                  />
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full opacity-50 blur-3xl transition-opacity duration-300 group-hover:opacity-80 ${t.halo}`}
+                  />
+                  <div className="relative">
+                    <div
+                      className={`grid h-12 w-12 place-items-center rounded-xl ring-1 ring-inset ${t.chipBg} ${t.ring}`}
+                    >
+                      <Icon className={`h-6 w-6 ${t.chipText}`} />
+                    </div>
+                    <h3 className="mt-5 font-display text-xl font-bold">
+                      {v.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-white/70">{v.body}</p>
+                  </div>
                 </SectionReveal>
               );
             })}
@@ -123,12 +150,18 @@ export default function AboutPage() {
               How we got here.
             </h2>
           </SectionReveal>
-          <ol className="mt-14 space-y-8">
+          <ol className="relative mt-14 space-y-10 before:absolute before:left-[7px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-gradient-to-b before:from-sky-400/50 before:via-violet-400/30 before:to-amber-400/30">
             {TIMELINE.map((t, i) => (
               <SectionReveal key={t.year} delay={i * 0.08}>
-                <li className="flex gap-6 border-l-2 border-ocean-500/30 pl-6">
+                <li className="relative flex gap-6 pl-8">
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-2 grid h-[15px] w-[15px] place-items-center rounded-full bg-ink-900 ring-2 ring-ocean-400 shadow-[0_0_12px_rgb(56_189_248_/_0.5)]"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-ocean-400" />
+                  </span>
                   <div>
-                    <p className="font-display text-2xl font-bold text-ocean-400">
+                    <p className="bg-gradient-to-br from-sky-300 to-sky-400 bg-clip-text font-display text-2xl font-bold text-transparent">
                       {t.year}
                     </p>
                     <p className="mt-1 text-white/80">{t.event}</p>
