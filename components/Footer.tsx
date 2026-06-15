@@ -33,11 +33,11 @@ export function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-white/60">
             <li className="flex gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-              Shyam Nagar, Jaipur
+              Thane West, Mumbai
             </li>
             <li className="flex gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-              Thane West, Mumbai
+              Shyam Nagar, Jaipur
             </li>
           </ul>
         </div>

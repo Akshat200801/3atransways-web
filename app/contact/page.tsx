@@ -16,15 +16,15 @@ interface Office {
 
 const OFFICES: Office[] = [
   {
-    city: "Jaipur (HQ)",
-    address: "Shyam Nagar, Jaipur, Rajasthan",
+    city: "Mumbai (Head Office)",
+    address: "Thane West, Mumbai, Maharashtra",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
     tone: "ocean",
   },
   {
-    city: "Mumbai",
-    address: "Thane West, Mumbai, Maharashtra",
+    city: "Jaipur (Registered Office)",
+    address: "Shyam Nagar, Jaipur, Rajasthan",
     phone: "+91 99280 84656",
     email: "ravi@3alogistics.net",
     tone: "gold",
