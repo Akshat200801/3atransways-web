@@ -15,6 +15,59 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* ─── ANIMATIONS ───────────────────────────────────────────── */
+
+    /* Ken-Burns: slow zoom+pan on the hero background image. */
+    @keyframes ken-burns {
+      0%   { transform: scale(1)    translate(0, 0); }
+      100% { transform: scale(1.12) translate(-1.5%, -1%); }
+    }
+
+    /* Generic fade-up used for hero text + revealed sections. */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Subtle gradient shimmer on the accent words. */
+    @keyframes gradient-flow {
+      0%   { background-position:   0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position:   0% 50%; }
+    }
+
+    /* Pulsing glow on timeline dots so the eye picks up the rhythm. */
+    @keyframes dot-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(96,165,250,0.15); }
+      50%      { box-shadow: 0 0 0 8px rgba(96,165,250,0.05); }
+    }
+
+    /* Hero elements stagger in on load. */
+    .hero .eyebrow  { animation: fade-up 0.7s ease 0.0s both; }
+    .hero h1        { animation: fade-up 0.8s cubic-bezier(0.2,0.7,0.2,1) 0.15s both; }
+    .hero .subtitle { animation: fade-up 0.7s ease 0.55s both; }
+    .hero .cta      { animation: fade-up 0.6s ease 0.8s both; }
+
+    /* Scroll-reveal: sections start hidden, JS adds .in-view to play. */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* Respect users with motion sensitivities — disable all animation. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
     a { color: #60a5fa; text-decoration: none; }
     a:hover { color: #93c5fd; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
@@ -47,6 +100,7 @@
       background-size: cover; background-position: center;
       opacity: 0.35;
       z-index: 0;
+      animation: ken-burns 18s ease-in-out infinite alternate;
     }
     .hero::after {
       content: ""; position: absolute; inset: 0;
@@ -64,9 +118,11 @@
       max-width: 18ch; margin: 0 auto 1.5rem;
     }
     .hero h1 .accent {
-      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      background: linear-gradient(90deg, #60a5fa, #c084fc, #f0abfc, #c084fc, #60a5fa);
+      background-size: 200% 100%;
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: gradient-flow 8s ease infinite;
     }
     .hero p.subtitle {
       font-size: 1.15rem; max-width: 38rem; margin: 0 auto 2.5rem;
@@ -94,9 +150,11 @@
       margin-bottom: 1.25rem;
     }
     section.s h2 .accent {
-      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      background: linear-gradient(90deg, #60a5fa, #c084fc, #f0abfc, #c084fc, #60a5fa);
+      background-size: 200% 100%;
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: gradient-flow 8s ease infinite;
     }
     section.s p.lede {
       font-size: 1.05rem; color: rgba(230,237,243,0.7);
@@ -127,6 +185,7 @@
       content: ""; position: absolute; left: -0.45rem; top: 0.45rem;
       width: 0.85rem; height: 0.85rem; border-radius: 50%;
       background: #60a5fa; box-shadow: 0 0 0 4px rgba(96,165,250,0.15);
+      animation: dot-pulse 2.4s ease-in-out infinite;
     }
     .timeline .year {
       font-size: 0.8rem; font-weight: 600; color: #60a5fa;
@@ -208,7 +267,7 @@
     <a href="#contact" class="cta">Get a quote</a>
   </header>
 
-  <section id="about" class="s">
+  <section id="about" class="s reveal">
     <div class="container">
       <p class="eyebrow">The 3A Way</p>
       <h2>Over a decade of moving <span class="accent">what matters.</span></h2>
@@ -229,7 +288,7 @@
     </div>
   </section>
 
-  <section id="timeline" class="s">
+  <section id="timeline" class="s reveal">
     <div class="container">
       <p class="eyebrow">Milestones</p>
       <h2>Fourteen years, one obsession.</h2>
@@ -266,7 +325,7 @@
     </div>
   </section>
 
-  <section id="offices" class="s">
+  <section id="offices" class="s reveal">
     <div class="container">
       <p class="eyebrow">Where we operate</p>
       <h2>Indian roots, <span class="accent">global lanes.</span></h2>
@@ -305,7 +364,7 @@
     </div>
   </section>
 
-  <section id="contact" class="s">
+  <section id="contact" class="s reveal">
     <div class="container" style="text-align: center;">
       <p class="eyebrow">Get in touch</p>
       <h2>Tell us where your cargo needs to go.</h2>
@@ -330,6 +389,27 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll-reveal: add `.in-view` to each `.reveal` element when it
+    // intersects the viewport so the CSS transition plays. One-shot per
+    // element via unobserve. Falls back to "show everything" on browsers
+    // (IE11, old Safari < 12.2) that don't support IntersectionObserver.
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
   </script>
 </body>
 </html>
