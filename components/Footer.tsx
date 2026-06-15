@@ -39,6 +39,14 @@ export function Footer() {
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
               Shyam Nagar, Jaipur
             </li>
+            <li className="flex gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
+              Hazira, Gujarat
+            </li>
+            <li className="flex gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
+              Gandhidham, Gujarat
+            </li>
           </ul>
         </div>
 
