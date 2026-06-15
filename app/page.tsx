@@ -24,7 +24,7 @@ export default function HomePage() {
               className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=1600&q=80&auto=format&fit=crop')",
+                  "url('https://images.unsplash.com/photo-1508404999913-79a3a2e75437?w=1600&q=80&auto=format&fit=crop')",
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-ocean-500/30 to-transparent" />
@@ -36,7 +36,7 @@ export default function HomePage() {
                 The 3A way
               </p>
               <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
-                Two decades of moving{" "}
+                Over a decade of moving{" "}
                 <span className="gradient-text">what matters</span>.
               </h2>
             </SectionReveal>
