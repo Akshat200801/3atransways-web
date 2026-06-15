@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Three A Transways — global cargo, moved with precision. Two decades of customs brokerage, multimodal freight forwarding, and project cargo across India and the world." />
+  <title>Three A Transways — Global Cargo, Moved with Precision</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0b1220;
+      color: #e6edf3;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { color: #93c5fd; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Top nav */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(11, 18, 32, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; }
+    nav .brand { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em; }
+    nav .brand span { color: #60a5fa; }
+    nav .links { display: flex; gap: 1.5rem; font-size: 0.9rem; color: rgba(230,237,243,0.7); }
+    nav .links a:hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=2000&q=80&auto=format&fit=crop');
+      background-size: cover; background-position: center;
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(11,18,32,0.4) 0%, rgba(11,18,32,0.95) 100%);
+      z-index: 1;
+    }
+    .hero > * { position: relative; z-index: 2; }
+    .hero .eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: #93c5fd; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+      max-width: 18ch; margin: 0 auto 1.5rem;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p.subtitle {
+      font-size: 1.15rem; max-width: 38rem; margin: 0 auto 2.5rem;
+      color: rgba(230,237,243,0.75);
+    }
+    .hero .cta {
+      display: inline-block; padding: 0.95rem 2.2rem;
+      background: #2563eb; color: #fff; font-weight: 600;
+      border-radius: 9999px; transition: background 0.2s;
+    }
+    .hero .cta:hover { background: #1d4ed8; }
+
+    /* Section base */
+    section.s {
+      padding: 6rem 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    section.s .eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: #60a5fa; margin-bottom: 0.75rem;
+    }
+    section.s h2 {
+      font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+      font-weight: 700; letter-spacing: -0.015em;
+      margin-bottom: 1.25rem;
+    }
+    section.s h2 .accent {
+      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    section.s p.lede {
+      font-size: 1.05rem; color: rgba(230,237,243,0.7);
+      max-width: 50rem;
+    }
+
+    /* About + value props */
+    .props { list-style: none; margin-top: 2rem; }
+    .props li {
+      display: flex; gap: 0.75rem; padding: 0.5rem 0;
+      color: rgba(230,237,243,0.85);
+    }
+    .props li::before {
+      content: "•"; color: #60a5fa; font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Timeline */
+    .timeline { margin-top: 2.5rem; position: relative; padding-left: 1rem; }
+    .timeline::before {
+      content: ""; position: absolute; left: 0; top: 0.5rem; bottom: 0.5rem;
+      width: 2px; background: linear-gradient(180deg, #60a5fa, #c084fc);
+    }
+    .timeline .row {
+      position: relative; padding-left: 1.5rem; padding-bottom: 1.75rem;
+    }
+    .timeline .row::before {
+      content: ""; position: absolute; left: -0.45rem; top: 0.45rem;
+      width: 0.85rem; height: 0.85rem; border-radius: 50%;
+      background: #60a5fa; box-shadow: 0 0 0 4px rgba(96,165,250,0.15);
+    }
+    .timeline .year {
+      font-size: 0.8rem; font-weight: 600; color: #60a5fa;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .timeline .event {
+      font-size: 1.05rem; color: #f1f5f9; margin-top: 0.15rem;
+    }
+
+    /* Offices */
+    .offices {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .office {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.75rem; padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .office:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96,165,250,0.4);
+    }
+    .office h3 {
+      font-size: 1.1rem; margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+    .office .addr {
+      font-size: 0.9rem; color: rgba(230,237,243,0.65);
+      margin-bottom: 0.75rem;
+    }
+    .office .row {
+      font-size: 0.9rem; margin-top: 0.4rem;
+      color: rgba(230,237,243,0.85);
+    }
+    .office .row strong {
+      color: rgba(230,237,243,0.55); font-weight: 500;
+      display: inline-block; min-width: 3rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 0; text-align: center;
+      color: rgba(230,237,243,0.5); font-size: 0.85rem;
+    }
+    footer strong { color: rgba(230,237,243,0.85); }
+
+    @media (max-width: 640px) {
+      nav .links { display: none; }
+      .hero { min-height: 70vh; padding: 4rem 1.5rem; }
+      section.s { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="brand">Three A <span>Transways</span></div>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#offices">Offices</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <p class="eyebrow">Three A Transways · est. 2012</p>
+    <h1>Global cargo, moved with <span class="accent">precision.</span></h1>
+    <p class="subtitle">
+      A full-stack logistics partner moving thousands of shipments a year
+      across sea, air, road, and warehouse. Direct carrier relationships,
+      24×7 operations, live tracking from booking to delivery.
+    </p>
+    <a href="#contact" class="cta">Get a quote</a>
+  </header>
+
+  <section id="about" class="s">
+    <div class="container">
+      <p class="eyebrow">The 3A Way</p>
+      <h2>Over a decade of moving <span class="accent">what matters.</span></h2>
+      <p class="lede">
+        Three A Transways began out of a small Jaipur office in 2012 — a
+        single broker, a battered Ambassador, and a notebook full of cargo
+        manifests. Today we're a full-stack logistics partner moving
+        thousands of shipments a year — but the obsession's unchanged: get
+        the customer's cargo on time, every time, however unreasonable the
+        timeline.
+      </p>
+      <ul class="props">
+        <li>Direct relationships with every major carrier — no middlemen, no markup</li>
+        <li>Customs clearance staff at JNPT, Mundra &amp; Nhava Sheva</li>
+        <li>24×7 operations desk — you talk to a human, not a ticket</li>
+        <li>Live tracking visibility from booking to delivery</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="timeline" class="s">
+    <div class="container">
+      <p class="eyebrow">Milestones</p>
+      <h2>Fourteen years, one obsession.</h2>
+      <div class="timeline">
+        <div class="row">
+          <div class="year">2012</div>
+          <div class="event">Founded in Jaipur as a customs house brokerage.</div>
+        </div>
+        <div class="row">
+          <div class="year">2014</div>
+          <div class="event">Registered as a Multimodal Transport Operator (MTO).</div>
+        </div>
+        <div class="row">
+          <div class="year">2016</div>
+          <div class="event">Hazira office opens.</div>
+        </div>
+        <div class="row">
+          <div class="year">2017</div>
+          <div class="event">Gandhidham office opens.</div>
+        </div>
+        <div class="row">
+          <div class="year">2024</div>
+          <div class="event">Digital platform rollout — live tracking and customer portal.</div>
+        </div>
+        <div class="row">
+          <div class="year">2025</div>
+          <div class="event">Break-bulk cargo movement executed to Spain.</div>
+        </div>
+        <div class="row">
+          <div class="year">2026</div>
+          <div class="event">Handled 11 project-cargo shipments of industrial machinery.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="offices" class="s">
+    <div class="container">
+      <p class="eyebrow">Where we operate</p>
+      <h2>Indian roots, <span class="accent">global lanes.</span></h2>
+      <p class="lede">
+        Mumbai (head office), Jaipur (registered), Hazira, Gandhidham,
+        Nhava Sheva, Mundra, Chennai — and partnerships across Dubai,
+        Singapore, Rotterdam, Long Beach.
+      </p>
+
+      <div class="offices">
+        <div class="office">
+          <h3>Mumbai · Head Office</h3>
+          <div class="addr">Thane West, Mumbai, Maharashtra</div>
+          <div class="row"><strong>Phone</strong> <a href="tel:+919928084656">+91 99280 84656</a></div>
+          <div class="row"><strong>Email</strong> <a href="mailto:ravi@3alogistics.net">ravi@3alogistics.net</a></div>
+        </div>
+        <div class="office">
+          <h3>Jaipur · Registered Office</h3>
+          <div class="addr">Shyam Nagar, Jaipur, Rajasthan</div>
+          <div class="row"><strong>Phone</strong> <a href="tel:+919928084656">+91 99280 84656</a></div>
+          <div class="row"><strong>Email</strong> <a href="mailto:ravi@3alogistics.net">ravi@3alogistics.net</a></div>
+        </div>
+        <div class="office">
+          <h3>Hazira</h3>
+          <div class="addr">Hazira, Gujarat</div>
+          <div class="row"><strong>Phone</strong> <a href="tel:+919928084656">+91 99280 84656</a></div>
+          <div class="row"><strong>Email</strong> <a href="mailto:ravi@3alogistics.net">ravi@3alogistics.net</a></div>
+        </div>
+        <div class="office">
+          <h3>Gandhidham</h3>
+          <div class="addr">Gandhidham, Gujarat</div>
+          <div class="row"><strong>Phone</strong> <a href="tel:+919928084656">+91 99280 84656</a></div>
+          <div class="row"><strong>Email</strong> <a href="mailto:ravi@3alogistics.net">ravi@3alogistics.net</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="s">
+    <div class="container" style="text-align: center;">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Tell us where your cargo needs to go.</h2>
+      <p class="lede" style="margin: 1rem auto 2rem;">
+        Quotes back within a few hours during operating windows.
+        For project cargo, break-bulk, or anything custom, call directly.
+      </p>
+      <p style="font-size: 1.15rem;">
+        <a href="mailto:ravi@3alogistics.net" style="margin-right: 2rem;">
+          ravi@3alogistics.net
+        </a>
+        <a href="tel:+919928084656">+91 99280 84656</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; <span id="year"></span> <strong>Three A Transways Pvt. Ltd.</strong> · Mumbai · Jaipur · Hazira · Gandhidham
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
