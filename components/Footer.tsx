@@ -7,10 +7,10 @@ export function Footer() {
     <footer className="border-t border-white/5 bg-ink-900 py-16">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-4 lg:px-12">
         <div className="md:col-span-2">
-          <div className="inline-flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-3 transition-opacity hover:opacity-80">
             <Image
               src="/logo.png"
-              alt=""
+              alt="Three A Transways"
               width={200}
               height={180}
               className="h-14 w-auto object-contain brightness-0 invert"
@@ -18,7 +18,7 @@ export function Footer() {
             <span className="font-display text-lg font-bold tracking-tight text-ocean-400">
               Three A Transways
             </span>
-          </div>
+          </Link>
           <p className="mt-4 max-w-md text-sm text-white/60">
             Global logistics, engineered for trust. Sea, air and road
             freight backed by warehousing and project cargo expertise
@@ -55,18 +55,15 @@ export function Footer() {
             Contact
           </h4>
           <ul className="mt-4 space-y-3 text-sm text-white/60">
-            <li className="flex gap-2">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-              <a href="tel:+919928084656" className="hover:text-white">
+            <li>
+              <a href="tel:+919928084656" className="flex items-center gap-2 transition-colors hover:text-white">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
                 +91 99280 84656
               </a>
             </li>
-            <li className="flex gap-2">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
-              <a
-                href="mailto:ravi@3alogistics.net"
-                className="hover:text-white"
-              >
+            <li>
+              <a href="mailto:ravi@3alogistics.net" className="flex items-center gap-2 transition-colors hover:text-white">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-ocean-400" />
                 ravi@3alogistics.net
               </a>
             </li>
@@ -77,9 +74,9 @@ export function Footer() {
       <div className="mx-auto mt-12 max-w-7xl border-t border-white/5 px-6 pt-6 text-xs text-white/40 lg:px-12">
         © {new Date().getFullYear()} Three A Transways Pvt Ltd. All rights
         reserved.{" "}
-        <Link href="/" className="ml-2 hover:text-white">
+        <a href="#top" className="ml-2 transition-colors hover:text-white">
           Back to top ↑
-        </Link>
+        </a>
       </div>
     </footer>
   );

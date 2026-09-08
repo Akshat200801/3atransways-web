@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const LINKS = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
@@ -69,11 +68,12 @@ export function Navbar() {
         </nav>
 
         <button
-          className="md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-md text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 md:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
@@ -96,6 +96,13 @@ export function Navbar() {
                   {l.label}
                 </Link>
               ))}
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-2 rounded-full bg-gradient-to-r from-ocean-500 to-ocean-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-ocean-500/20"
+              >
+                Get a Quote
+              </Link>
             </nav>
           </motion.div>
         )}

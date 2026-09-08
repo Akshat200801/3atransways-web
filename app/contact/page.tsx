@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { SectionReveal } from "@/components/SectionReveal";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { TONE, type Tone } from "@/lib/tones";
@@ -111,11 +111,11 @@ export default function ContactPage() {
               <div className="relative">
               {sent ? (
                 <div className="grid place-items-center py-16 text-center">
-                  <div className="mb-4 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-ocean-500 to-gold-500">
-                    <Send className="h-6 w-6 text-ink-900" />
+                  <div className="mb-4 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-emerald-500 to-ocean-500">
+                    <CheckCircle className="h-7 w-7 text-white" />
                   </div>
                   <h3 className="font-display text-2xl font-bold">
-                    Got it.
+                    Message sent!
                   </h3>
                   <p className="mt-2 text-sm text-white/70">
                     We&apos;ll be in touch within 4 business hours.
@@ -147,7 +147,10 @@ export default function ContactPage() {
                     textarea
                   />
                   {errorMsg && (
-                    <p className="mt-5 text-sm text-red-400">{errorMsg}</p>
+                    <div className="mt-5 flex items-start gap-3 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                      <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                      {errorMsg}
+                    </div>
                   )}
                   <button
                     type="submit"
@@ -189,21 +192,21 @@ export default function ContactPage() {
                         <MapPin className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
                         {o.address}
                       </li>
-                      <li className="flex gap-2">
-                        <Phone className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
+                      <li>
                         <a
                           href={`tel:${o.phone.replace(/\s+/g, "")}`}
-                          className="hover:text-white"
+                          className="flex items-center gap-2 transition-colors hover:text-white"
                         >
+                          <Phone className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
                           {o.phone}
                         </a>
                       </li>
-                      <li className="flex gap-2">
-                        <Mail className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
+                      <li>
                         <a
                           href={`mailto:${o.email}`}
-                          className="hover:text-white"
+                          className="flex items-center gap-2 transition-colors hover:text-white"
                         >
+                          <Mail className={`mt-0.5 h-4 w-4 shrink-0 ${t.chipText}`} />
                           {o.email}
                         </a>
                       </li>
