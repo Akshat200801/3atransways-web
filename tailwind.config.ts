@@ -29,8 +29,19 @@ const config: Config = {
         "ken-burns": "kenBurns 20s ease-out infinite alternate",
         "gradient-shift": "gradientShift 8s ease-in-out infinite",
         "fade-up": "fadeUp 0.8s ease-out forwards",
+        "mesh-drift": "meshDrift 18s ease-in-out infinite",
+        "mesh-drift-slow": "meshDrift 26s ease-in-out infinite reverse",
+        ripple: "ripple 1.6s ease-out infinite",
       },
       keyframes: {
+        meshDrift: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(40px,-30px,0) scale(1.12)" },
+        },
+        ripple: {
+          "0%": { transform: "scale(1)", opacity: "0.7" },
+          "100%": { transform: "scale(2)", opacity: "0" },
+        },
         kenBurns: {
           "0%": { transform: "scale(1) translate(0,0)" },
           "100%": { transform: "scale(1.15) translate(-2%, -2%)" },

@@ -1,45 +1,41 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+
+import { useRef, useEffect } from "react";
+import { gsap, SplitText } from "@/lib/gsap";
 
 type Tone = "gold" | "ocean" | "emerald" | "violet";
 
 interface Stat {
   value: number;
-  suffix?: string;
+  suffix: string;
   label: string;
   tone: Tone;
 }
 
-/** Tone palette borrowed from the platform's StatCards — left accent
- *  bar, corner halo, idle ring, hover glow shadow. */
-const TONE: Record<
-  Tone,
-  { bar: string; halo: string; ring: string; glow: string; chip: string }
-> = {
+const TONE: Record<Tone, { bar: string; halo: string; ring: string; glow: string; chip: string }> = {
   gold: {
-    bar: "bg-gradient-to-b from-amber-400 via-amber-400/70 to-amber-400/30",
+    bar: "bg-gradient-to-b from-amber-400 to-transparent",
     halo: "bg-amber-400/20",
     ring: "ring-amber-400/20",
     glow: "shadow-[0_0_30px_-10px_rgb(251_191_36_/_0.35)]",
     chip: "text-amber-300",
   },
   ocean: {
-    bar: "bg-gradient-to-b from-sky-400 via-sky-400/70 to-sky-400/30",
+    bar: "bg-gradient-to-b from-sky-400 to-transparent",
     halo: "bg-sky-400/20",
     ring: "ring-sky-400/20",
     glow: "shadow-[0_0_30px_-10px_rgb(56_189_248_/_0.4)]",
     chip: "text-sky-300",
   },
   emerald: {
-    bar: "bg-gradient-to-b from-emerald-400 via-emerald-400/70 to-emerald-400/30",
+    bar: "bg-gradient-to-b from-emerald-400 to-transparent",
     halo: "bg-emerald-400/20",
     ring: "ring-emerald-400/20",
     glow: "shadow-[0_0_30px_-10px_rgb(52_211_153_/_0.35)]",
     chip: "text-emerald-300",
   },
   violet: {
-    bar: "bg-gradient-to-b from-violet-400 via-violet-400/70 to-violet-400/30",
+    bar: "bg-gradient-to-b from-violet-400 to-transparent",
     halo: "bg-violet-400/20",
     ring: "ring-violet-400/20",
     glow: "shadow-[0_0_30px_-10px_rgb(167_139_250_/_0.35)]",
@@ -54,92 +50,146 @@ const STATS: Stat[] = [
   { value: 99.4, suffix: "%", label: "On-time clearance rate", tone: "violet" },
 ];
 
-function Counter({ to, suffix }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement | null>(null);
-  // No margin — fires the instant any pixel of the tile is visible.
-  // The previous '-100px' inset threshold was missing on tall mobile
-  // viewports for the middle tiles, leaving the counters stuck at 0.
-  const inView = useInView(ref, { once: true });
-  const [n, setN] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const duration = 1600;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / duration);
-      // Ease-out cubic — fast start, gentle finish, feels classy.
-      const eased = 1 - Math.pow(1 - p, 3);
-      setN(to * eased);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, to]);
-
-  const isFloat = !Number.isInteger(to);
-  const display = isFloat ? n.toFixed(1) : Math.round(n).toLocaleString("en-IN");
-  return (
-    <span ref={ref}>
-      {display}
-      {suffix}
-    </span>
-  );
+// en-US grouping, not en-IN: the approved copy reads "1,000,000+", whereas
+// Indian lakh grouping would render it "10,00,000+".
+function format(value: number, target: number) {
+  return Number.isInteger(target)
+    ? Math.round(value).toLocaleString("en-US")
+    : value.toFixed(1);
 }
 
 export function Stats() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const ctx = gsap.context(() => {
+      const eyebrow = section.querySelector<HTMLElement>(".stats-eyebrow");
+      let split: SplitText | null = null;
+
+      if (eyebrow && !reduced) {
+        split = new SplitText(eyebrow, { type: "chars" });
+        gsap.from(split.chars, {
+          opacity: 0,
+          y: 30,
+          rotateX: -30,
+          stagger: 0.02,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 75%" },
+        });
+      }
+
+      const cards = gsap.utils.toArray<HTMLElement>(".stat-card");
+
+      cards.forEach((card, i) => {
+        if (!reduced) {
+          gsap.from(card, {
+            opacity: 0,
+            y: 80,
+            rotateY: -8,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: i * 0.12,
+            scrollTrigger: { trigger: section, start: "top 75%" },
+          });
+
+          gsap.fromTo(
+            card.querySelector(".stat-bar"),
+            { height: "0%" },
+            {
+              height: "60%",
+              duration: 0.9,
+              ease: "power2.out",
+              delay: i * 0.12 + 0.2,
+              scrollTrigger: { trigger: section, start: "top 75%" },
+            }
+          );
+        }
+
+        const counter = card.querySelector<HTMLElement>(".stat-value");
+        const target = Number(card.dataset.value);
+        if (!counter || Number.isNaN(target)) return;
+
+        if (reduced) {
+          counter.textContent = format(target, target);
+          return;
+        }
+
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 2,
+          ease: "power2.out",
+          onUpdate: () => {
+            counter.textContent = format(obj.val, target);
+          },
+          scrollTrigger: { trigger: card, start: "top 80%" },
+        });
+      });
+
+      return () => split?.revert();
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative overflow-hidden py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-14 text-center"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ocean-400">
+    <section
+      ref={sectionRef}
+      id="track-record"
+      className="relative overflow-hidden bg-ink-900 py-24 lg:py-32"
+    >
+      {/* Mesh gradient — slow ocean blobs, barely there */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-40 top-10 h-[520px] w-[520px] rounded-full bg-ocean-500/10 blur-[120px] animate-mesh-drift" />
+        <div className="absolute -right-32 bottom-0 h-[460px] w-[460px] rounded-full bg-gold-500/[0.07] blur-[120px] animate-mesh-drift-slow" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mb-14 text-center">
+          <p className="stats-eyebrow text-xs font-semibold uppercase tracking-[0.3em] text-ocean-400">
             Track record
           </p>
-          <h2 className="mt-3 bg-gradient-to-br from-white via-white to-white/70 bg-clip-text font-display text-3xl font-bold text-transparent sm:text-5xl">
-            Numbers that move <span className="gradient-text">cargo</span> —
-            and earn trust.
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-5xl">
+            Numbers that move <span className="gradient-text">cargo</span> — and earn trust.
           </h2>
-        </motion.div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {STATS.map((s, i) => {
+        </div>
+
+        <div
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          style={{ perspective: "1200px" }}
+        >
+          {STATS.map((s) => {
             const t = TONE[s.tone];
             return (
-              <motion.div
+              <div
                 key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 ring-1 ring-inset transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.06] lg:p-7 ${t.ring} ${t.glow}`}
+                data-value={s.value}
+                className={`stat-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 ring-1 ring-inset backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/[0.06] lg:p-7 ${t.ring} ${t.glow}`}
               >
-                {/* Left accent bar */}
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute left-0 top-4 bottom-4 w-[3px] rounded-r-full opacity-80 transition-opacity duration-200 group-hover:opacity-100 ${t.bar}`}
+                  className={`stat-bar pointer-events-none absolute left-0 top-1/2 w-[3px] -translate-y-1/2 rounded-r-full ${t.bar}`}
                 />
-                {/* Top-right halo */}
                 <div
                   aria-hidden
                   className={`pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-60 blur-3xl transition-opacity duration-300 group-hover:opacity-90 ${t.halo}`}
                 />
-                <div className="relative">
-                  <p className="font-display text-3xl font-bold tracking-tighter text-white tabular-nums sm:text-4xl lg:text-[2rem] xl:text-[2.25rem]">
-                    <Counter to={s.value} suffix={s.suffix} />
-                  </p>
-                  <p
-                    className={`mt-3 text-xs font-semibold uppercase tracking-[0.12em] ${t.chip}`}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              </motion.div>
+                <p className="relative font-display text-3xl font-bold tabular-nums tracking-tighter text-white sm:text-4xl lg:text-[2rem] xl:text-[2.25rem]">
+                  <span className="stat-value">0</span>
+                  {s.suffix}
+                </p>
+                <p
+                  className={`relative mt-3 text-xs font-semibold uppercase tracking-[0.12em] ${t.chip}`}
+                >
+                  {s.label}
+                </p>
+              </div>
             );
           })}
         </div>
