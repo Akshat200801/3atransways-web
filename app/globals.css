@@ -86,3 +86,45 @@ body {
   background-clip: text;
   color: transparent;
 }
+
+/* Custom cursor — hides the OS pointer only once CustomCursor has mounted,
+   so a JS failure or touch device never leaves the page cursorless. */
+body.custom-cursor,
+body.custom-cursor *,
+body.custom-cursor *::before,
+body.custom-cursor *::after {
+  cursor: none !important;
+}
+
+/* 3D perspective for the hero word reveal */
+.perspective-\[1000px\] {
+  perspective: 1000px;
+}
+
+/* Animated conic border for the primary CTA. @property lets the angle
+   interpolate; browsers without it keep a static border. */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-gradient {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+.liquid-border {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#0a0e1a, #0a0e1a) padding-box,
+    conic-gradient(from var(--gradient-angle), #38bdf8, #d4a056, #38bdf8) border-box;
+  animation: rotate-gradient 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-border {
+    animation: none;
+  }
+}
